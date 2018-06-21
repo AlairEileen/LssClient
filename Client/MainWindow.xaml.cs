@@ -51,10 +51,6 @@ namespace Client
                     abc++;
                     if (abc % 5 == 0)
                     {
-                        messageManager. SendMessage(clientSocket, new LogMessage { Type = MsgType.ReportLog, ClientID = mwData.ClientID, LogInfo = new LogModel { Content = $"Log_{abc}" } });
-                    }
-                    else if (abc % 7 == 0)
-                    {
                         messageManager. SendMessage(clientSocket, new BugMessage { Type = MsgType.ReportBug, ClientID = mwData.ClientID,BugInfo = new BugModel { Content = $"Bug_{abc}" } });
                     }
                 }
@@ -95,8 +91,8 @@ namespace Client
 
 
             //设定服务器IP地址  
-            //IPAddress ip = IPAddress.Parse("127.0.0.1");
-            IPAddress ip = IPAddress.Parse("47.94.208.29");
+            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            //IPAddress ip = IPAddress.Parse("47.94.208.29");
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {

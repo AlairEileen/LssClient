@@ -32,14 +32,12 @@ namespace Common
 
         public void ReceiveMessage(Socket socket, byte[] data, int dataSize)
         {
-            new Msg(socket, data, dataSize, ExecuteHeart, ExecuteOutCoin, ExecuteOutCoinFinish, ExecuteSetDefaultChance, ExecuteSetVoltageDefault);
+            new Msg(socket, data, dataSize, ExecuteHeart, ExecuteOutCoin, ExecuteOutCoinFinish);
         }
 
         public abstract void ExecuteOutCoinFinish(Msg obj);
         public abstract void ExecuteOutCoin(OutCoinMsg obj);
         public abstract void ExecuteHeart(Msg obj);
-        public abstract void ExecuteSetDefaultChance(DefaultChanceSetMsg obj);
-        public abstract void ExecuteSetVoltageDefault(DefaultVoltageSetMsg obj);
 
     }
 
@@ -61,7 +59,7 @@ namespace Common
         [JsonIgnore]
         public Socket Socket { get; set; }
         public Msg() { }
-        public Msg(Socket socket, byte[] dataB, int dataSize, Action<Msg> ExecuteHeart, Action<OutCoinMsg> ExecuteOutCoin, Action<Msg> ExecuteOutCoinFinish, Action<DefaultChanceSetMsg> ExecuteSetDefaultChance, Action<DefaultVoltageSetMsg> ExecuteSetDefaultVoltage)
+        public Msg(Socket socket, byte[] dataB, int dataSize, Action<Msg> ExecuteHeart, Action<OutCoinMsg> ExecuteOutCoin, Action<Msg> ExecuteOutCoinFinish)
         {
 
 
@@ -82,12 +80,6 @@ namespace Common
                         break;
                     case MsgType.OutCoin:
                         ReceivedMsg(data, socket, bMsg.Item1, bMsg.Item2, ExecuteOutCoin);
-                        break;
-                    case MsgType.SetDefaultVoltage:
-                        ReceivedMsg(data, socket, bMsg.Item1, bMsg.Item2, ExecuteSetDefaultVoltage);
-                        break;
-                    case MsgType.SetDefaultChance:
-                        ReceivedMsg(data, socket, bMsg.Item1, bMsg.Item2, ExecuteSetDefaultChance);
                         break;
                     default:
                         break;
@@ -311,28 +303,8 @@ namespace Common
         /// </summary>
         ExecuteFailed = 4000,
         /// <summary>
-        /// 上报日志
-        /// </summary>
-        ReportLog = 7000,
-        /// <summary>
         /// 上报故障
         /// </summary>
-        ReportBug = 7001,
-        /// <summary>
-        /// 设置默认概率
-        /// </summary>
-        SetDefaultChance = 9000,
-        /// <summary>
-        /// 设置默认概率成功
-        /// </summary>
-        SetDefaultChanceFinish = 9001,
-        /// <summary>
-        /// 设置默认电压
-        /// </summary>
-        SetDefaultVoltage = 9002,
-        /// <summary>
-        /// 设置默认电压成功
-        /// </summary>
-        SetDefaultVoltagSuccess = 9003
+        ReportBug = 7001
     }
 }

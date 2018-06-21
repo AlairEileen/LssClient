@@ -70,32 +70,7 @@ namespace Client
             //throw new NotImplementedException();
         }
 
-        public override void ExecuteSetDefaultChance(DefaultChanceSetMsg obj)
-        {
-            viewData.Logs += "正在设置默认概率\n";
-            obj.ClientID = viewData.ClientID;
-            new Thread(() =>
-            {
-                    Thread.Sleep(1000);
-                    viewData.RunStatus += $"设置默认概率为：{obj.Chance}\n";
-                viewData.Logs += $"设置概率{obj.Chance}成功！\n";
-
-                SendMessage(obj.Socket, new DefaultChanceSetMsgFinish { Type = MsgType.SetDefaultChanceFinish, ClientID = obj.ClientID, MessageID = obj.MessageID });
-            }).Start();
-        }
-
-        public override void ExecuteSetVoltageDefault(DefaultVoltageSetMsg obj)
-        {
-            viewData.Logs += "正在设置默认电压\n";
-            obj.ClientID = viewData.ClientID;
-            new Thread(() =>
-            {
-                Thread.Sleep(1000);
-                viewData.RunStatus += $"设置默认电压为：{obj.Voltage}\n";
-                viewData.Logs += $"设置电压{obj.Voltage}成功！\n";
-
-                SendMessage(obj.Socket, new DefaultVoltageSetMsgFinish { Type = MsgType.SetDefaultVoltagSuccess, ClientID = obj.ClientID, MessageID = obj.MessageID });
-            }).Start();
-        }
+       
+    
     }
 }
