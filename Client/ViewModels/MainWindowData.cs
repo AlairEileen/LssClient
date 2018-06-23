@@ -11,7 +11,7 @@ namespace Client.ViewModels
     public class MainWindowData : BindableObject
     {
         private string runStatus = "";
-
+  
         public string Logs { get => logs; set { SetProperty(ref logs, value); } }
 
         public string RunStatus { get => runStatus; set => SetProperty(ref runStatus, value); }
